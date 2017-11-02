@@ -12,9 +12,12 @@
       ],
       "index": "index.html",
       "main": "main.ts",
+      "polyfills": "polyfills.ts",
       "test": "../../scripts/test.ts",
       "tsconfig": "tsconfig.json",
+      "testTsconfig": "../../src/tsconfig.spec.json",
       "prefix": "",
+      "serviceWorker": false,
       "styles": [
       ],
       "scripts": [],
