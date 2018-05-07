@@ -7,7 +7,8 @@ Angular 2+ QQ Maps Components
 
 ## Demo
 
-[Live Demo](https://cipchk.github.io/angular-qq-maps/)
+- [Live Demo](https://cipchk.github.io/angular-qq-maps/)
+- [Stackblitz](https://stackblitz.com/edit/angular-qq-maps)
 
 ### 1、安装
 
@@ -21,7 +22,7 @@ npm install angular-qq-maps --save
 import { AqmModule } from 'angular-qq-maps';
 
 @NgModule({
-    imports: [ 
+    imports: [
         BrowserModule,
         AqmModule.forRoot({
             apiKey: '' // app key为必选项
