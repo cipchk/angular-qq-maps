@@ -1,6 +1,6 @@
 {
   "name": "angular-qq-maps",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "./bundles/aqm.umd.js",
   "module": "./esm5/aqm.js",
   "es2015": "./esm2015/aqm.js",
