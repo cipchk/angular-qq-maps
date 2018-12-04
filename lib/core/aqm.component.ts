@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  forwardRef,
-  ViewChild,
   ElementRef,
   OnDestroy,
   EventEmitter,
@@ -13,7 +11,6 @@ import {
   ViewEncapsulation,
   OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { LoaderService } from './loader.service';
 import { AqmConfig } from './aqm.config';
@@ -23,15 +20,8 @@ declare const qq: any;
 @Component({
   selector: 'aqm-map',
   template: ``,
-  styles: [
-  `
-  .angular-qq-maps-container { display:block; width:100%; height:100%; }
-  `,
-  ],
-  host: {
-    '[class.angular-qq-maps-container]': 'true',
-  },
-  encapsulation: ViewEncapsulation.None,
+  styles: [`aqm-map { display:block; width:100%; height:100%; }`],
+  encapsulation: ViewEncapsulation.None
 })
 export class AqmComponent implements OnInit, OnChanges, OnDestroy {
   @Input() options: any = {};
@@ -44,7 +34,7 @@ export class AqmComponent implements OnInit, OnChanges, OnDestroy {
     private COG: AqmConfig,
     private loader: LoaderService,
     private zone: NgZone,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._initMap();
@@ -80,7 +70,7 @@ export class AqmComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private destroy() {}
+  private destroy() { }
 
   ngOnDestroy(): void {
     this.destroy();

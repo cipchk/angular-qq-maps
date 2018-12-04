@@ -1,0 +1,20 @@
+{
+  "name": "angular-qq-maps",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Angular QQ Maps Components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cipchk/angular-qq-maps.git"
+  },
+  "keywords": [
+    "angular-qq-maps",
+    "ng2-qq-maps",
+    "qq maps"
+  ],
+  "author": "cipchk <cipchk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cipchk/angular-qq-maps/issues"
+  },
+  "homepage": "https://github.com/cipchk/angular-qq-maps#readme"
+}

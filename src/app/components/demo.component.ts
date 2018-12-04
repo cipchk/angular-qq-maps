@@ -2,9 +2,7 @@ import {
   NgZone,
   OnDestroy,
   Component,
-  OnInit,
   ViewEncapsulation,
-  AfterViewInit,
   ViewChild,
   ElementRef,
 } from '@angular/core';

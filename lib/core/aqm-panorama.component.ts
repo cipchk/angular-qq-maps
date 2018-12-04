@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  forwardRef,
-  ViewChild,
   ElementRef,
   OnDestroy,
   EventEmitter,
@@ -13,26 +11,16 @@ import {
   ViewEncapsulation,
   OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { LoaderService } from './loader.service';
 import { AqmConfig } from './aqm.config';
 
 declare const qq: any;
-declare const window: any;
-declare const UE: any;
 
 @Component({
   selector: 'aqm-panorama',
   template: ``,
-  styles: [
-    `
-  .angular-qq-maps-container { display:block; width:100%; height:100%; }
-  `,
-  ],
-  host: {
-    '[class.angular-qq-maps-container]': 'true',
-  },
+  styles: [`aqm-panorama { display:block; width:100%; height:100%; }`],
   encapsulation: ViewEncapsulation.None,
 })
 export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
@@ -46,7 +34,7 @@ export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
     private COG: AqmConfig,
     private loader: LoaderService,
     private zone: NgZone,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._initMap();
@@ -85,7 +73,7 @@ export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private destroy() {}
+  private destroy() { }
 
   ngOnDestroy(): void {
     this.destroy();

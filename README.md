@@ -4,6 +4,10 @@ Angular 2+ QQ Maps Components
 [![NPM version](https://img.shields.io/npm/v/angular-qq-maps.svg)](https://www.npmjs.com/package/angular-qq-maps)
 [![Build Status](https://travis-ci.org/cipchk/angular-qq-maps.svg?branch=master)](https://travis-ci.org/cipchk/angular-qq-maps)
 
+## Version
+
+- `2.x` angular 6.x
+- `7.x` angular 7.x
 
 ## Demo
 

@@ -12,8 +12,7 @@
     "lib": ["es2017", "dom"],
     "baseUrl": "./",
     "paths": {
-      "angular-qq-maps": ["./lib/index"],
-      "angular-qq-maps/*": ["./lib/*"]
+      "angular-qq-maps": ["./lib/aqm.module"]
     }
   }
 }
