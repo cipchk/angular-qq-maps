@@ -21,7 +21,7 @@
     "lint": "tslint -p tsconfig.json -c tslint.json 'lib/*/*.ts'",
     "test": "ng test --code-coverage --watch=false",
     "site:build": "ng build --prod --build-optimizer",
-    "site:gh": "ng build --prod --build-optimizer --base-href /angular-baidu-maps/ && gh-pages -d ./dist",
+    "site:gh": "ng build --prod --build-optimizer --base-href /angular-qq-maps/ && gh-pages -d ./dist",
     "build": "bash build.sh",
     "release": "npm run build && cd publish && npm publish --access public"
   },
