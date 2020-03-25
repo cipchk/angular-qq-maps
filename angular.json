@@ -4,9 +4,15 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-qq-maps": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "projectType": "application",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -14,27 +20,44 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets"],
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
@@ -44,59 +67,37 @@
             "browserTarget": "angular-qq-maps:build"
           },
           "configurations": {
-            "prod": {
-              "browserTarget": "angular-qq-maps:build:prod"
+            "production": {
+              "browserTarget": "angular-qq-maps:build:production"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "angular-qq-maps:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [],
-            "exclude": []
-          }
-        }
-      }
-    },
-    "angular-qq-maps-lib": {
-      "root": "lib",
-      "projectType": "library",
-      "prefix": "",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "lib/tsconfig.lib.json",
-            "project": "lib/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "lib/test.ts",
-            "karmaConfig": "lib/karma.conf.js",
-            "polyfills": "lib/polyfills.ts",
-            "tsConfig": "lib/tsconfig.spec.json",
-            "scripts": []
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "scripts": [],
+            "styles": [],
+            "assets": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "angular-qq-maps",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "",
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {
-      "prefix": ""
-    }
-  }
+  "defaultProject": "angular-qq-maps"
 }

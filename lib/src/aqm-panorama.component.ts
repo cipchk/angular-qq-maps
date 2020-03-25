@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   ElementRef,
-  OnDestroy,
   EventEmitter,
   Output,
   NgZone,
@@ -23,7 +22,7 @@ declare const qq: any;
   styles: [`aqm-panorama { display:block; width:100%; height:100%; }`],
   encapsulation: ViewEncapsulation.None,
 })
-export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
+export class AqmPanoramaComponent implements OnInit, OnChanges {
   @Input() options: any = {};
   @Output() ready = new EventEmitter<any>();
 
@@ -36,7 +35,7 @@ export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
     private zone: NgZone,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._initMap();
   }
 
@@ -44,7 +43,7 @@ export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
     if ('options' in changes) this._updateOptions();
   }
 
-  private _initMap() {
+  private _initMap(): void {
     if (this.map) return;
     this.loader
       .load()
@@ -66,16 +65,10 @@ export class AqmPanoramaComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  private _updateOptions() {
+  private _updateOptions(): void {
     this.options = Object.assign({}, this.COG.panoramaOptions, this.options);
     if (this.map) {
       this.map.setOptions(this.options);
     }
-  }
-
-  private destroy() { }
-
-  ngOnDestroy(): void {
-    this.destroy();
   }
 }
