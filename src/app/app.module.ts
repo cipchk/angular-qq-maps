@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -14,7 +13,6 @@ import { DemoPanoramaComponent } from './components/panorama.component';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     RouterModule.forRoot(
       [
         { path: '', component: DemoComponent },

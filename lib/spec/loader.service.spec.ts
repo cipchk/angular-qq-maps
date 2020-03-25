@@ -1,14 +1,13 @@
-import { NgModule, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   inject,
   TestBed,
   ComponentFixtureAutoDetect,
   ComponentFixture,
 } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
-import { LoaderService } from '../core/loader.service';
-import { AqmModule } from '../aqm.module';
+import { LoaderService } from '../src/loader.service';
+import { AqmModule } from '../src/aqm.module';
 
 describe('Service: LoaderService', () => {
   let fixture: ComponentFixture<EmptyTestComponent>;

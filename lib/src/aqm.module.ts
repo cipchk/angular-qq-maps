@@ -1,14 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { AqmComponent } from './core/aqm.component';
-import { AqmPanoramaComponent } from './core/aqm-panorama.component';
-import { AqmConfig } from './core/aqm.config';
-import { LoaderService } from './core/loader.service';
-
-export { AqmConfig } from './core/aqm.config';
-export { AqmComponent } from './core/aqm.component';
-export { AqmPanoramaComponent } from './core/aqm-panorama.component';
+import { AqmComponent } from './aqm.component';
+import { AqmPanoramaComponent } from './aqm-panorama.component';
+import { AqmConfig } from './aqm.config';
+import { LoaderService } from './loader.service';
 
 @NgModule({
   imports: [CommonModule],
