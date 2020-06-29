@@ -6,15 +6,29 @@ declare const document: any;
 @Injectable()
 export class LoaderService {
   private _scriptLoadingPromise: Promise<void>;
-  private _cog: any;
-  constructor(cog: AqmConfig) {
-    this._cog = {
+  private _cog: AqmConfig;
+
+  set cog(val: AqmConfig) {
+    const _cog = (this._cog = {
+      gl: false,
       apiProtocol: 'auto',
       apiVersion: '2.exp',
       apiCallback: 'angularQQMapsLoader',
-      apiHostAndPath: 'map.qq.com/api/js',
-      ...cog,
-    };
+      ...val,
+    });
+    if (!_cog.apiHostAndPath) {
+      this._scriptLoadingPromise = null;
+      _cog.apiHostAndPath = _cog.gl
+        ? 'map.qq.com/api/gljs'
+        : 'map.qq.com/api/js';
+    }
+  }
+  get cog(): AqmConfig {
+    return this._cog;
+  }
+
+  constructor(cog: AqmConfig) {
+    this.cog = cog;
   }
 
   load(): Promise<void> {

@@ -9,11 +9,14 @@ import {
   SimpleChanges,
   ViewEncapsulation,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 import { LoaderService } from './loader.service';
 import { AqmConfig } from './aqm.config';
+import { isSSR } from './aqm.core';
 
 declare const qq: any;
+declare const TMap: any;
 
 @Component({
   selector: 'aqm-map',
@@ -27,9 +30,11 @@ declare const qq: any;
       }
     `,
   ],
+  exportAs: 'aqmMap',
   encapsulation: ViewEncapsulation.None,
 })
-export class AqmComponent implements OnInit, OnChanges {
+export class AqmComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() config: AqmConfig;
   @Input() options: any = {};
   @Output() ready = new EventEmitter<any>();
 
@@ -43,10 +48,16 @@ export class AqmComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
+    if (isSSR) {
+      return;
+    }
     this._initMap();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if ('config' in changes) {
+      this.loader.cog = this.config;
+    }
     if ('options' in changes) {
       this._updateOptions();
     }
@@ -61,7 +72,11 @@ export class AqmComponent implements OnInit, OnChanges {
       .then(() => {
         this.zone.runOutsideAngular(() => {
           try {
-            this.map = new qq.maps.Map(this.el.nativeElement, this.options);
+            console.log(this.options);
+            this.map = new (this.loader.cog.gl === true ? TMap : qq.maps).Map(
+              this.el.nativeElement,
+              this.options,
+            );
           } catch (ex) {
             console.warn('地图初始化失败', ex);
           }
@@ -75,8 +90,14 @@ export class AqmComponent implements OnInit, OnChanges {
 
   private _updateOptions(): void {
     this.options = { ...this.COG.mapOptions, ...this.options };
-    if (this.map) {
+    if (this.map && this.map.setOptions) {
       this.map.setOptions(this.options);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.map && this.map.destroy) {
+      this.map.destroy();
     }
   }
 }

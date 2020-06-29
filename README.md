@@ -61,11 +61,11 @@ export class AppModule { }
 ```typescript
 //添加监听事件
 qq.maps.event.addListener(this.map, 'click', (event: any) => {
-    // doing
-    this.zone.run(() => {
-        // 对于需要Angular监听的变量而放在 zone 里面，可以确保页面渲染。
-        this.status = `click ${+new Date}`;
-    });
+  // doing
+  this.zone.run(() => {
+    // 对于需要Angular监听的变量而放在 zone 里面，可以确保页面渲染。
+    this.status = `click ${+new Date}`;
+  });
 });
 ```
 
@@ -73,9 +73,9 @@ qq.maps.event.addListener(this.map, 'click', (event: any) => {
 
 ```typescript
 ngOnDestroy(): void {
-    ['click'].forEach(eventName => {
-        qq.maps.event.clearListeners(this.map, eventName);
-    });
+  ['click'].forEach(eventName => {
+    qq.maps.event.clearListeners(this.map, eventName);
+  });
 }
 ```
 
@@ -87,14 +87,15 @@ ngOnDestroy(): void {
 
 | 名称    | 类型           | 默认值  | 描述 |
 | ------- | ------------- | ----- | ----- |
-| apiKey | string |  | APP KEY 必填项 |
-| apiHostAndPath | string | map.qq.com/api/js |  |
-| apiCallback | string | angularQQMapsLoader | API异步加载回调函数名 |
-| apiVersion | string | 2.exp | API版本号 |
-| apiLibraries | string[] |  | 附加库 |
-| apiProtocol | string | auto | API 请求协议 |
-| mapOptions | Object |  | 默认地图配置项，等同于[MapOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/mapoptions.html) |
-| panoramaOptions | Object |  | 默认街景配置项，等同于[PanoramaOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/panoramaoptions.html) |
+| `gl` | `boolean` | `false` | 表示使用 [JavaScript API GL](https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview) 版本 |
+| `apiKey` | `string` | - | APP KEY 必填项 |
+| `apiHostAndPath` | `string` | `map.qq.com/api/js` | - |
+| `apiCallback` | `string` | `angularQQMapsLoader` | API异步加载回调函数名 |
+| `apiVersion` | `string` | `2.exp` | API版本号 |
+| `apiLibraries` | `string[]` | - | 附加库 |
+| `apiProtocol` | `string` | `auto` | API 请求协议 |
+| `mapOptions` | `Object` | - | 默认地图配置项，等同于[MapOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/mapoptions.html)，当指定 `gl: true` 表示Gl版本的[MapOptions 对象规范](https://lbs.qq.com/javascript_gl/doc/mapoptions.html) |
+| `panoramaOptions` | `Object` | - | 默认街景配置项，等同于[PanoramaOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/panoramaoptions.html) |
 
 ## Troubleshooting
 

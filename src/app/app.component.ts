@@ -24,11 +24,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
           <li class="nav-item">
             <a class="nav-link" routerLink="/panorama">街景</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/gljs">JavaScript API GL</a>
+          </li>
         </ul>
       </div>
     </nav>
     <p class="mt-3 mb-3">
-      Angular 2+ QQ Maps Components，有关更多细节见<a
+      QQ Maps Components for Angular，有关更多细节见<a
         href="https://github.com/cipchk/angular-qq-maps/blob/master/README.md"
         target="_blank"
         >README.md</a

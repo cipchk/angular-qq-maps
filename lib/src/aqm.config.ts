@@ -1,8 +1,13 @@
 export class AqmConfig {
   /**
+   * 表示使用 [JavaScript API GL](https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview) 版本
+   */
+  gl?: boolean;
+
+  /**
    * APP KEY 必填项
    */
-  apiKey: string;
+  apiKey?: string;
 
   /**
    * 默认：map.qq.com/api/js
@@ -30,7 +35,7 @@ export class AqmConfig {
   apiProtocol?: 'http' | 'https' | 'auto';
 
   /**
-   * 默认地图配置项，等同于[MapOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/mapoptions.html)
+   * 默认地图配置项，等同于[MapOptions 对象规范](http://lbs.qq.com/javascript_v2/doc/mapoptions.html)，当指定 `gl: true` 表示Gl版本的[MapOptions 对象规范](https://lbs.qq.com/javascript_gl/doc/mapoptions.html)
    */
   mapOptions?: any;
 
