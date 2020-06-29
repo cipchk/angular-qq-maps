@@ -27,7 +27,7 @@ export class DemoComponent implements OnDestroy {
   // 卫星
   satelliteOptions: any;
   private mapSatellite: any;
-  onReady(mapNative: any) {
+  onReady(mapNative: any): void {
     mapNative.setOptions({
       zoom: 12,
       center: new qq.maps.LatLng(39.916527, 116.397128),
@@ -47,15 +47,15 @@ export class DemoComponent implements OnDestroy {
     });
   }
 
-  panTo() {
+  panTo(): void {
     this.map.panTo(new qq.maps.LatLng(39.9, 116.4));
   }
 
-  zoom() {
+  zoom(): void {
     this.map.zoomTo((this.map.getZoom() + 1) % 17);
   }
 
-  infoWindow() {
+  infoWindow(): void {
     const infoWin = new qq.maps.InfoWindow({
       map: this.map,
     });
@@ -63,7 +63,7 @@ export class DemoComponent implements OnDestroy {
     infoWin.setContent('Hello world');
     infoWin.setPosition(this.map.getCenter());
   }
-  onReadySatellite(mapNative: any) {
+  onReadySatellite(mapNative: any): void {
     mapNative.setOptions({
       zoom: 14,
       center: new qq.maps.LatLng(39.916527, 116.397128),

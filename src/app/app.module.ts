@@ -9,6 +9,7 @@ import { AqmModule } from 'angular-qq-maps';
 import { AppComponent } from './app.component';
 import { DemoComponent } from './components/demo.component';
 import { DemoPanoramaComponent } from './components/panorama.component';
+import { DemoGlJsComponent } from './components/gljs.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { DemoPanoramaComponent } from './components/panorama.component';
       [
         { path: '', component: DemoComponent },
         { path: 'panorama', component: DemoPanoramaComponent },
+        { path: 'gljs', component: DemoGlJsComponent },
       ],
       { useHash: true },
     ),
@@ -27,8 +29,13 @@ import { DemoPanoramaComponent } from './components/panorama.component';
       apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY',
     }),
   ],
-  declarations: [AppComponent, DemoComponent, DemoPanoramaComponent],
+  declarations: [
+    AppComponent,
+    DemoComponent,
+    DemoPanoramaComponent,
+    DemoGlJsComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppDemoModule { }
+export class AppDemoModule {}
