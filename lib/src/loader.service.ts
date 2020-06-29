@@ -8,15 +8,13 @@ export class LoaderService {
   private _scriptLoadingPromise: Promise<void>;
   private _cog: any;
   constructor(cog: AqmConfig) {
-    this._cog = Object.assign(
-      <AqmConfig>{
-        apiProtocol: 'auto',
-        apiVersion: '2.exp',
-        apiCallback: 'angularQQMapsLoader',
-        apiHostAndPath: 'map.qq.com/api/js',
-      },
-      cog,
-    );
+    this._cog = {
+      apiProtocol: 'auto',
+      apiVersion: '2.exp',
+      apiCallback: 'angularQQMapsLoader',
+      apiHostAndPath: 'map.qq.com/api/js',
+      ...cog,
+    };
   }
 
   load(): Promise<void> {
@@ -31,8 +29,8 @@ export class LoaderService {
     script.src = this._getSrc();
 
     this._scriptLoadingPromise = new Promise<void>(
-      (resolve: Function, reject: Function) => {
-        (<any>window)[this._cog.apiCallback] = () => {
+      (resolve: () => void, reject: (error: Event) => void) => {
+        (window as any)[this._cog.apiCallback] = () => {
           resolve();
         };
 
@@ -75,7 +73,9 @@ export class LoaderService {
       })
       .map((k: string) => {
         const i = queryParams[k];
-        if (Array.isArray(i)) return { key: k, value: i.join(',') };
+        if (Array.isArray(i)) {
+          return { key: k, value: i.join(',') };
+        }
         return { key: k, value: i };
       })
       .map((entry: { key: string; value: string }) => {

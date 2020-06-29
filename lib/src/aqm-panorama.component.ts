@@ -10,7 +10,6 @@ import {
   ViewEncapsulation,
   OnInit,
 } from '@angular/core';
-
 import { LoaderService } from './loader.service';
 import { AqmConfig } from './aqm.config';
 
@@ -19,7 +18,15 @@ declare const qq: any;
 @Component({
   selector: 'aqm-panorama',
   template: ``,
-  styles: [`aqm-panorama { display:block; width:100%; height:100%; }`],
+  styles: [
+    `
+      aqm-panorama {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    `,
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class AqmPanoramaComponent implements OnInit, OnChanges {
@@ -29,22 +36,26 @@ export class AqmPanoramaComponent implements OnInit, OnChanges {
   private map: any = null;
 
   constructor(
-    private el: ElementRef,
+    private el: ElementRef<HTMLElement>,
     private COG: AqmConfig,
     private loader: LoaderService,
     private zone: NgZone,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._initMap();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('options' in changes) this._updateOptions();
+    if ('options' in changes) {
+      this._updateOptions();
+    }
   }
 
   private _initMap(): void {
-    if (this.map) return;
+    if (this.map) {
+      return;
+    }
     this.loader
       .load()
       .then(() => {
@@ -66,7 +77,7 @@ export class AqmPanoramaComponent implements OnInit, OnChanges {
   }
 
   private _updateOptions(): void {
-    this.options = Object.assign({}, this.COG.panoramaOptions, this.options);
+    this.options = { ...this.COG.panoramaOptions, ...this.options };
     if (this.map) {
       this.map.setOptions(this.options);
     }
