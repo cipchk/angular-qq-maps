@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
 import { AqmComponent } from './aqm.component';
 import { AqmPanoramaComponent } from './aqm-panorama.component';
 import { AqmConfig } from './aqm.config';
@@ -13,7 +12,7 @@ import { LoaderService } from './loader.service';
   exports: [AqmComponent, AqmPanoramaComponent],
 })
 export class AqmModule {
-  static forRoot(config: AqmConfig): ModuleWithProviders {
+  static forRoot(config: AqmConfig): ModuleWithProviders<AqmModule> {
     return {
       ngModule: AqmModule,
       providers: [{ provide: AqmConfig, useValue: config }],

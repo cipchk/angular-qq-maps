@@ -17,13 +17,16 @@ declare const qq: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoComponent implements OnDestroy {
+  constructor(private el: ElementRef, private zone: NgZone) {}
   options: any = {};
   status = '';
   @ViewChild('map') mapComp: AqmComponent;
 
-  constructor(private el: ElementRef, private zone: NgZone) {}
-
   private map: any;
+
+  // 卫星
+  satelliteOptions: any;
+  private mapSatellite: any;
   onReady(mapNative: any) {
     mapNative.setOptions({
       zoom: 12,
@@ -60,10 +63,6 @@ export class DemoComponent implements OnDestroy {
     infoWin.setContent('Hello world');
     infoWin.setPosition(this.map.getCenter());
   }
-
-  // 卫星
-  satelliteOptions: any;
-  private mapSatellite: any;
   onReadySatellite(mapNative: any) {
     mapNative.setOptions({
       zoom: 14,
@@ -74,7 +73,7 @@ export class DemoComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    ['click'].forEach(eventName => {
+    ['click'].forEach((eventName) => {
       qq.maps.event.clearListeners(this.map, eventName);
     });
   }

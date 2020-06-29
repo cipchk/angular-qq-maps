@@ -1,13 +1,9 @@
 # angular-qq-maps
-Angular 2+ QQ Maps Components
+
+[QQ Maps](https://lbs.qq.com/) Components for Angular
 
 [![NPM version](https://img.shields.io/npm/v/angular-qq-maps.svg)](https://www.npmjs.com/package/angular-qq-maps)
-[![Build Status](https://travis-ci.org/cipchk/angular-qq-maps.svg?branch=master)](https://travis-ci.org/cipchk/angular-qq-maps)
-
-## Version
-
-- `2.x` angular 6.x
-- `7.x` angular 7.x
+![Ci](https://github.com/cipchk/angular-qq-maps/workflows/Ci/badge.svg)
 
 ## Demo
 
@@ -26,14 +22,14 @@ npm install angular-qq-maps --save
 import { AqmModule } from 'angular-qq-maps';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        AqmModule.forRoot({
-            apiKey: '' // app key为必选项
-        })
-    ],
-    declarations: [AppComponent],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    AqmModule.forRoot({
+      apiKey: '' // app key为必选项
+    })
+  ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -85,7 +81,7 @@ ngOnDestroy(): void {
 
 当然，这里还有一些关于**覆盖物**相关里面涉及的事件，也一并做相应的销毁处理。
 
-**很抱歉，如果你在使用 angular-qq-maps 的时候请认真阅读**。
+**很抱歉，如果你在使用 `angular-qq-maps` 的时候请认真阅读**。
 
 ## AqmConfig
 

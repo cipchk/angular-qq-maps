@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   ElementRef,
-  OnDestroy,
   EventEmitter,
   Output,
   NgZone,
@@ -11,7 +10,6 @@ import {
   ViewEncapsulation,
   OnInit,
 } from '@angular/core';
-
 import { LoaderService } from './loader.service';
 import { AqmConfig } from './aqm.config';
 
@@ -20,32 +18,44 @@ declare const qq: any;
 @Component({
   selector: 'aqm-map',
   template: ``,
-  styles: [`aqm-map { display:block; width:100%; height:100%; }`],
-  encapsulation: ViewEncapsulation.None
+  styles: [
+    `
+      aqm-map {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    `,
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
-export class AqmComponent implements OnInit, OnChanges, OnDestroy {
+export class AqmComponent implements OnInit, OnChanges {
   @Input() options: any = {};
   @Output() ready = new EventEmitter<any>();
 
   private map: any = null;
 
   constructor(
-    private el: ElementRef,
+    private el: ElementRef<HTMLElement>,
     private COG: AqmConfig,
     private loader: LoaderService,
     private zone: NgZone,
-  ) { }
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._initMap();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('options' in changes) this._updateOptions();
+    if ('options' in changes) {
+      this._updateOptions();
+    }
   }
 
-  private _initMap() {
-    if (this.map) return;
+  private _initMap(): void {
+    if (this.map) {
+      return;
+    }
     this.loader
       .load()
       .then(() => {
@@ -63,16 +73,10 @@ export class AqmComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  private _updateOptions() {
-    this.options = Object.assign({}, this.COG.mapOptions, this.options);
+  private _updateOptions(): void {
+    this.options = { ...this.COG.mapOptions, ...this.options };
     if (this.map) {
       this.map.setOptions(this.options);
     }
-  }
-
-  private destroy() { }
-
-  ngOnDestroy(): void {
-    this.destroy();
   }
 }
