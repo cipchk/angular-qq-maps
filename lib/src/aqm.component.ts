@@ -34,18 +34,13 @@ declare const TMap: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class AqmComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() config: AqmConfig;
+  @Input() config!: AqmConfig;
   @Input() options: any = {};
   @Output() ready = new EventEmitter<any>();
 
   private map: any = null;
 
-  constructor(
-    private el: ElementRef<HTMLElement>,
-    private COG: AqmConfig,
-    private loader: LoaderService,
-    private zone: NgZone,
-  ) {}
+  constructor(private el: ElementRef<HTMLElement>, private COG: AqmConfig, private loader: LoaderService, private zone: NgZone) {}
 
   ngOnInit(): void {
     if (isSSR) {
@@ -73,10 +68,7 @@ export class AqmComponent implements OnInit, OnChanges, OnDestroy {
         this.zone.runOutsideAngular(() => {
           try {
             console.log(this.options);
-            this.map = new (this.loader.cog.gl === true ? TMap : qq.maps).Map(
-              this.el.nativeElement,
-              this.options,
-            );
+            this.map = new (this.loader.cog.gl === true ? TMap : qq.maps).Map(this.el.nativeElement, this.options);
           } catch (ex) {
             console.warn('地图初始化失败', ex);
           }

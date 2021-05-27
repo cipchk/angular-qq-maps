@@ -1,34 +1,19 @@
 <div class="card mb-3">
-  <div class="card-header">
-    示例（本示例可能会受一Angular项目内同时使用 GL
-    或传统的影响可能在切换过程中导致加载失败时，请直接刷新即可）
-  </div>
+  <div class="card-header">示例（本示例可能会受一Angular项目内同时使用 GL 或传统的影响可能在切换过程中导致加载失败时，请直接刷新即可）</div>
   <div class="card-block">
-    <textarea highlight-js>
-&lt;aqm-map [config]="{ gl: true, apiHostAndPath: null }" style="height: 500px;"></aqm-map></textarea
-    >
+    <textarea highlight-js>&lt;aqm-map [config]="{ gl: true, apiHostAndPath: '' }" style="height: 500px;"></aqm-map></textarea>
     <aqm-map
       *ngIf="options"
-      [config]="{ gl: true, apiHostAndPath: null }"
+      [config]="{ gl: true, apiHostAndPath: '' }"
       [options]="options"
       (ready)="onReady($event)"
-      style="height: 500px;"
+      style="height: 500px"
     ></aqm-map>
-    <h5 style="border-bottom: 1px solid #eee;" class="mt-3 mb-3 pb-3">操作</h5>
+    <h5 style="border-bottom: 1px solid #eee" class="mt-3 mb-3 pb-3">操作</h5>
     <div class="mb-3">
-      <button type="button" (click)="change2D()" class="btn btn-primary btn-sm">
-        切换2D
-      </button>
-      <button type="button" (click)="change3D()" class="btn btn-primary btn-sm">
-        切换3D
-      </button>
-      <button
-        type="button"
-        (click)="updateStyle()"
-        class="btn btn-primary btn-sm"
-      >
-        夜间模式(可能Key的关系没有效果)
-      </button>
+      <button type="button" (click)="change2D()" class="btn btn-primary btn-sm">切换2D</button>
+      <button type="button" (click)="change3D()" class="btn btn-primary btn-sm">切换3D</button>
+      <button type="button" (click)="updateStyle()" class="btn btn-primary btn-sm">夜间模式(可能Key的关系没有效果)</button>
     </div>
   </div>
 </div>

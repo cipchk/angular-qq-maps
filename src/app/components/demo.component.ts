@@ -1,11 +1,4 @@
-import {
-  NgZone,
-  OnDestroy,
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { NgZone, OnDestroy, Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { AqmComponent } from 'angular-qq-maps';
 
 declare const qq: any;
@@ -20,7 +13,7 @@ export class DemoComponent implements OnDestroy {
   constructor(private el: ElementRef, private zone: NgZone) {}
   options: any = {};
   status = '';
-  @ViewChild('map') mapComp: AqmComponent;
+  @ViewChild('map') mapComp!: AqmComponent;
 
   private map: any;
 
