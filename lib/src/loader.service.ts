@@ -5,8 +5,8 @@ declare const document: any;
 
 @Injectable()
 export class LoaderService {
-  private _scriptLoadingPromise: Promise<void>;
-  private _cog: AqmConfig;
+  private _scriptLoadingPromise: Promise<void> | null = null;
+  private _cog!: AqmConfig;
 
   set cog(val: AqmConfig) {
     const _cog = (this._cog = {
@@ -18,9 +18,7 @@ export class LoaderService {
     });
     if (!_cog.apiHostAndPath) {
       this._scriptLoadingPromise = null;
-      _cog.apiHostAndPath = _cog.gl
-        ? 'map.qq.com/api/gljs'
-        : 'map.qq.com/api/js';
+      _cog.apiHostAndPath = _cog.gl ? 'map.qq.com/api/gljs' : 'map.qq.com/api/js';
     }
   }
   get cog(): AqmConfig {
@@ -42,17 +40,15 @@ export class LoaderService {
     script.defer = true;
     script.src = this._getSrc();
 
-    this._scriptLoadingPromise = new Promise<void>(
-      (resolve: () => void, reject: (error: Event) => void) => {
-        (window as any)[this._cog.apiCallback] = () => {
-          resolve();
-        };
+    this._scriptLoadingPromise = new Promise<void>((resolve: () => void, reject: (error: Event) => void) => {
+      (window as any)[this._cog.apiCallback!] = () => {
+        resolve();
+      };
 
-        script.onerror = (error: Event) => {
-          reject(error);
-        };
-      },
-    );
+      script.onerror = (error: Event) => {
+        reject(error);
+      };
+    });
 
     document.body.appendChild(script);
     return this._scriptLoadingPromise;
@@ -71,7 +67,7 @@ export class LoaderService {
         protocol = '';
         break;
     }
-    const queryParams: { [key: string]: string | string[] } = {
+    const queryParams: { [key: string]: string | string[] | undefined } = {
       v: this._cog.apiVersion,
       key: this._cog.apiKey,
       libraries: this._cog.apiLibraries,
@@ -80,10 +76,7 @@ export class LoaderService {
     const params: string = Object.keys(queryParams)
       .filter((k: string) => queryParams[k] != null)
       .filter((k: string) => {
-        return (
-          !Array.isArray(queryParams[k]) ||
-          (Array.isArray(queryParams[k]) && queryParams[k].length > 0)
-        );
+        return !Array.isArray(queryParams[k]) || (Array.isArray(queryParams[k]) && queryParams[k]!.length > 0);
       })
       .map((k: string) => {
         const i = queryParams[k];
@@ -92,7 +85,7 @@ export class LoaderService {
         }
         return { key: k, value: i };
       })
-      .map((entry: { key: string; value: string }) => {
+      .map((entry: { key: string; value: string | undefined }) => {
         return `${entry.key}=${entry.value}`;
       })
       .join('&');

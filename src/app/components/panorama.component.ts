@@ -1,9 +1,4 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { AqmPanoramaComponent } from 'angular-qq-maps';
 
 declare const qq: any;
@@ -23,7 +18,7 @@ export class DemoPanoramaComponent {
     },
     zoom: 1,
   };
-  @ViewChild('map') map: AqmPanoramaComponent;
+  @ViewChild('map') map!: AqmPanoramaComponent;
 
   constructor(private el: ElementRef) {}
 }
